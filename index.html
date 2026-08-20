@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML IIT - Master Level IIT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logo-icon">ML</div>
+        <div>
+            <h1>ML IIT</h1>
+            <span>Master Level IIT</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#subjects">Subjects</a>
+        <a href="#about">About</a>
+    </nav>
+</header>
+
+<main>
+
+    <!-- HOME -->
+    <section id="home" class="hero">
+        <div class="hero-text">
+            <span class="badge">🎓 IIT PRACTICE PLATFORM</span>
+
+            <h2>Master IIT.<br><span>One Question at a Time.</span></h2>
+
+            <p>
+                Practice IIT-level questions, discover your mistakes,
+                understand the solutions and improve your score.
+            </p>
+
+            <button onclick="startTest()">Start Practice Test →</button>
+        </div>
+
+        <div class="hero-card">
+            <div class="card-top">
+                <span>YOUR PERFORMANCE</span>
+                <span>📊</span>
+            </div>
+
+            <div class="score-circle">
+                <strong>85%</strong>
+                <small>Accuracy</small>
+            </div>
+
+            <div class="stats">
+                <div>
+                    <b>42</b>
+                    <span>Correct</span>
+                </div>
+                <div>
+                    <b>8</b>
+                    <span>Wrong</span>
+                </div>
+                <div>
+                    <b>50</b>
+                    <span>Attempted</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUBJECTS -->
+    <section id="subjects">
+        <div class="section-title">
+            <span>CHOOSE YOUR SUBJECT</span>
+            <h2>Practice by Subject</h2>
+        </div>
+
+        <div class="subjects">
+
+            <div class="subject-card physics" onclick="startTest()">
+                <div class="subject-icon">⚡</div>
+                <h3>Physics</h3>
+                <p>Mechanics, Electrodynamics, Optics & more</p>
+                <button>Practice →</button>
+            </div>
+
+            <div class="subject-card chemistry" onclick="startTest()">
+                <div class="subject-icon">🧪</div>
+                <h3>Chemistry</h3>
+                <p>Organic, Inorganic & Physical Chemistry</p>
+                <button>Practice →</button>
+            </div>
+
+            <div class="subject-card mathematics" onclick="startTest()">
+                <div class="subject-icon">∑</div>
+                <h3>Mathematics</h3>
+                <p>Algebra, Calculus, Geometry & more</p>
+                <button>Practice →</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TEST -->
+    <section id="test" class="test-section hidden">
+
+        <div class="test-header">
+            <div>
+                <span>ML IIT PRACTICE TEST</span>
+                <h2 id="questionNumber">Question 1 of 5</h2>
+            </div>
+
+            <div class="timer">
+                ⏱️ <span id="timer">05:00</span>
+            </div>
+        </div>
+
+        <div class="progress">
+            <div id="progressBar"></div>
+        </div>
+
+        <div class="question-box">
+
+            <span class="question-tag">QUESTION</span>
+
+            <h2 id="questionText"></h2>
+
+            <div id="options"></div>
+
+            <div class="test-buttons">
+                <button id="previousBtn" onclick="previousQuestion()">
+                    ← Previous
+                </button>
+
+                <button id="nextBtn" onclick="nextQuestion()">
+                    Next →
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- RESULT -->
+    <section id="result" class="result-section hidden">
+
+        <div class="result-card">
+
+            <span class="badge">🎉 TEST COMPLETED</span>
+
+            <h2>Your Result</h2>
+
+            <div class="percentage">
+                <span id="percentage">0%</span>
+                <small>Percentage</small>
+            </div>
+
+            <div class="result-stats">
+
+                <div class="correct">
+                    <strong id="correctCount">0</strong>
+                    <span>Correct</span>
+                </div>
+
+                <div class="wrong">
+                    <strong id="wrongCount">0</strong>
+                    <span>Wrong</span>
+                </div>
+
+                <div class="unattempted">
+                    <strong id="unattemptedCount">0</strong>
+                    <span>Unattempted</span>
+                </div>
+
+            </div>
+
+            <div class="score">
+                Score: <strong id="score">0 / 5</strong>
+            </div>
+
+            <button onclick="showReview()">Review Mistakes →</button>
+
+        </div>
+
+    </section>
+
+    <!-- REVIEW -->
+    <section id="review" class="review-section hidden">
+
+        <div class="section-title">
+            <span>LEARN FROM YOUR MISTAKES</span>
+            <h2>Detailed Analysis</h2>
+        </div>
+
+        <div id="reviewContainer"></div>
+
+        <button class="home-button" onclick="goHome()">
+            ← Back to Home
+        </button>
+
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+
+        <div class="about-box">
+
+            <span class="badge">ABOUT ML IIT</span>
+
+            <h2>Practice. Analyze. Improve.</h2>
+
+            <p>
+                ML IIT is a practice platform designed for students
+                preparing for IIT-level examinations. Our goal is not
+                only to tell you whether your answer is correct,
+                but also to explain why you made a mistake.
+            </p>
+
+            <div class="features">
+
+                <div>
+                    <span>✓</span>
+                    <p>Detailed Solutions</p>
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    <p>Mistake Analysis</p>
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    <p>Performance Tracking</p>
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    <p>Percentage Score</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <h2>ML IIT</h2>
+    <p>Master Level IIT • Practice Smarter • Score Better</p>
+    <p>© 2026 ML IIT</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
