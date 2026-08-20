@@ -1,79 +1,87 @@
 const questions = [
 {
-q:"A disc rotates at 4 revolutions per second. Its angular velocity is:",
-options:["4π rad/s","8π rad/s","16π rad/s","32π rad/s"],
-answer:1
+  q: "Q16. A disc rotates at 4 revolutions per second. Its angular velocity is:",
+  options: ["4π rad/s", "8π rad/s", "16π rad/s", "32π rad/s"],
+  answer: 1
 },
 {
-q:"Two charges +4 μC and +1 μC are 3 m apart. Where is the electric field zero?",
-options:["1 m from +4 μC","2 m from +4 μC","Midpoint","Outside the charges"],
-answer:1
+  q: "Q17. Two charges +4 μC and +1 μC are 3 m apart. Where is the electric field zero?",
+  options: ["1 m from +4 μC", "2 m from +4 μC", "Midpoint", "Outside the charges"],
+  answer: 1
 },
 {
-q:"An ideal gas receives 600 J of heat and performs 250 J of work. Increase in internal energy is:",
-options:["350 J","600 J","850 J","250 J"],
-answer:0
+  q: "Q18. An ideal gas receives 600 J of heat and performs 250 J of work. Increase in internal energy is:",
+  options: ["350 J", "600 J", "850 J", "250 J"],
+  answer: 0
 },
 {
-q:"A wave has frequency 250 Hz and wavelength 1.2 m. Find its speed.",
-options:["200 m/s","250 m/s","300 m/s","360 m/s"],
-answer:2
+  q: "Q19. A wave has frequency 250 Hz and wavelength 1.2 m. Find its speed.",
+  options: ["200 m/s", "250 m/s", "300 m/s", "360 m/s"],
+  answer: 2
 },
 {
-q:"A convex lens has focal length 20 cm. An object is placed 40 cm away. Image distance is:",
-options:["10 cm","20 cm","40 cm","Infinity"],
-answer:2
+  q: "Q20. A convex lens has focal length 20 cm. An object is placed 40 cm away. Image distance is:",
+  options: ["10 cm", "20 cm", "40 cm", "Infinity"],
+  answer: 2
 }
 ];
 
 let current = 0;
 let selected = -1;
 
-const box = document.getElementById("questionBox");
-const next = document.getElementById("nextBtn");
+const question = document.getElementById("question");
+const options = document.getElementById("options");
+const nextBtn = document.getElementById("nextBtn");
+const startBtn = document.getElementById("startBtn");
 
-function loadQuestion(){
+function loadQuestion() {
+  selected = -1;
 
-selected = -1;
+  const q = questions[current];
+  question.textContent = q.q;
+  options.innerHTML = "";
 
-const q = questions[current];
+  q.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    div.innerHTML = `${String.fromCharCode(65 + i)}. ${opt}`;
 
-box.innerHTML = `
-<h2>QUESTION ${current+16}</h2>
-<h3>${q.q}</h3>
+    div.onclick = () => {
+      document.querySelectorAll(".option").forEach(x => x.classList.remove("active"));
+      div.classList.add("active");
+      selected = i;
+    };
 
-${q.options.map((op,i)=>`
-<div class="option" onclick="choose(${i},this)">
-${String.fromCharCode(65+i)}. ${op}
-</div>`).join("")}
-`;
+    options.appendChild(div);
+  });
 
-next.innerText = current === questions.length-1 ? "Finish" : "Next →";
+  nextBtn.textContent = current === questions.length - 1 ? "Finish" : "Next →";
 }
 
-function choose(i,el){
+// Start Practice button
+startBtn.addEventListener("click", () => {
+  document.getElementById("subjects").scrollIntoView({
+    behavior: "smooth"
+  });
+});
 
-selected=i;
+// Next button
+nextBtn.addEventListener("click", () => {
+  if (selected === -1) {
+    alert("Please select an option.");
+    return;
+  }
 
-document.querySelectorAll(".option").forEach(x=>x.classList.remove("active"));
-el.classList.add("active");
-}
+  current++;
 
-next.onclick=()=>{
+  if (current >= questions.length) {
+    question.innerHTML = "🎉 Test Completed!";
+    options.innerHTML = "<h3>Your responses have been recorded.</h3>";
+    nextBtn.style.display = "none";
+    return;
+  }
 
-if(selected==-1){
-alert("Select an option");
-return;
-}
-
-current++;
-
-if(current<questions.length){
-loadQuestion();
-}else{
-box.innerHTML="<h1>Test Completed ✅</h1>";
-next.style.display="none";
-}
-};
+  loadQuestion();
+});
 
 loadQuestion();
