@@ -1,87 +1,348 @@
 const questions = [
-{
-  q: "Q16. A disc rotates at 4 revolutions per second. Its angular velocity is:",
-  options: ["4π rad/s", "8π rad/s", "16π rad/s", "32π rad/s"],
-  answer: 1
-},
-{
-  q: "Q17. Two charges +4 μC and +1 μC are 3 m apart. Where is the electric field zero?",
-  options: ["1 m from +4 μC", "2 m from +4 μC", "Midpoint", "Outside the charges"],
-  answer: 1
-},
-{
-  q: "Q18. An ideal gas receives 600 J of heat and performs 250 J of work. Increase in internal energy is:",
-  options: ["350 J", "600 J", "850 J", "250 J"],
-  answer: 0
-},
-{
-  q: "Q19. A wave has frequency 250 Hz and wavelength 1.2 m. Find its speed.",
-  options: ["200 m/s", "250 m/s", "300 m/s", "360 m/s"],
-  answer: 2
-},
-{
-  q: "Q20. A convex lens has focal length 20 cm. An object is placed 40 cm away. Image distance is:",
-  options: ["10 cm", "20 cm", "40 cm", "Infinity"],
-  answer: 2
-}
+    {
+        question: "A body is moving with a velocity of 20 m/s. If its velocity becomes 30 m/s in 5 seconds, what is its acceleration?",
+        options: [
+            "1 m/s²",
+            "2 m/s²",
+            "5 m/s²",
+            "10 m/s²"
+        ],
+        answer: 1,
+        explanation: "Acceleration = (Final velocity − Initial velocity) / Time.",
+        mistake: "You need to subtract the initial velocity from the final velocity before dividing by time.",
+        solution: "a = (30 − 20) / 5 = 10 / 5 = 2 m/s²."
+    },
+
+    {
+        question: "What is the derivative of x² with respect to x?",
+        options: [
+            "x",
+            "2x",
+            "x²",
+            "2"
+        ],
+        answer: 1,
+        explanation: "Using the power rule, d(xⁿ)/dx = n xⁿ⁻¹.",
+        mistake: "You may have forgotten to multiply by the power of x.",
+        solution: "d(x²)/dx = 2x¹ = 2x."
+    },
+
+    {
+        question: "Which element has the atomic number 1?",
+        options: [
+            "Helium",
+            "Oxygen",
+            "Hydrogen",
+            "Carbon"
+        ],
+        answer: 2,
+        explanation: "Atomic number represents the number of protons in an atom.",
+        mistake: "Remember that hydrogen is the first element in the periodic table.",
+        solution: "Hydrogen has one proton, so its atomic number is 1."
+    },
+
+    {
+        question: "If 2x + 6 = 14, what is the value of x?",
+        options: [
+            "2",
+            "4",
+            "6",
+            "8"
+        ],
+        answer: 1,
+        explanation: "Subtract 6 from both sides and then divide by 2.",
+        mistake: "You may have forgotten to divide the remaining value by 2.",
+        solution: "2x + 6 = 14 → 2x = 8 → x = 4."
+    },
+
+    {
+        question: "Which law states that every action has an equal and opposite reaction?",
+        options: [
+            "Newton's First Law",
+            "Newton's Second Law",
+            "Newton's Third Law",
+            "Law of Gravitation"
+        ],
+        answer: 2,
+        explanation: "Newton's Third Law describes action and reaction forces.",
+        mistake: "The First Law describes inertia, while the Second Law relates force, mass and acceleration.",
+        solution: "Newton's Third Law: For every action, there is an equal and opposite reaction."
+    }
 ];
 
-let current = 0;
-let selected = -1;
+let currentQuestion = 0;
+let userAnswers = Array(questions.length).fill(null);
+let timeLeft = 300;
+let timerInterval;
 
-const question = document.getElementById("question");
-const options = document.getElementById("options");
-const nextBtn = document.getElementById("nextBtn");
-const startBtn = document.getElementById("startBtn");
+function startTest() {
 
-function loadQuestion() {
-  selected = -1;
+    document.getElementById("home").classList.add("hidden");
+    document.getElementById("subjects").classList.add("hidden");
+    document.getElementById("about").classList.add("hidden");
 
-  const q = questions[current];
-  question.textContent = q.q;
-  options.innerHTML = "";
+    document.getElementById("test").classList.remove("hidden");
 
-  q.options.forEach((opt, i) => {
-    const div = document.createElement("div");
-    div.className = "option";
-    div.innerHTML = `${String.fromCharCode(65 + i)}. ${opt}`;
+    currentQuestion = 0;
+    userAnswers = Array(questions.length).fill(null);
+    timeLeft = 300;
 
-    div.onclick = () => {
-      document.querySelectorAll(".option").forEach(x => x.classList.remove("active"));
-      div.classList.add("active");
-      selected = i;
-    };
+    clearInterval(timerInterval);
 
-    options.appendChild(div);
-  });
+    timerInterval = setInterval(updateTimer, 1000);
 
-  nextBtn.textContent = current === questions.length - 1 ? "Finish" : "Next →";
+    loadQuestion();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
-// Start Practice button
-startBtn.addEventListener("click", () => {
-  document.getElementById("subjects").scrollIntoView({
-    behavior: "smooth"
-  });
-});
+function loadQuestion() {
 
-// Next button
-nextBtn.addEventListener("click", () => {
-  if (selected === -1) {
-    alert("Please select an option.");
-    return;
-  }
+    const question = questions[currentQuestion];
 
-  current++;
+    document.getElementById("questionNumber").textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
 
-  if (current >= questions.length) {
-    question.innerHTML = "🎉 Test Completed!";
-    options.innerHTML = "<h3>Your responses have been recorded.</h3>";
-    nextBtn.style.display = "none";
-    return;
-  }
+    document.getElementById("questionText").textContent =
+        question.question;
 
-  loadQuestion();
-});
+    const optionsContainer = document.getElementById("options");
 
-loadQuestion();
+    optionsContainer.innerHTML = "";
+
+    question.options.forEach((option, index) => {
+
+        const optionDiv = document.createElement("div");
+
+        optionDiv.className = "option";
+
+        optionDiv.textContent =
+            `${String.fromCharCode(65 + index)}. ${option}`;
+
+        if (userAnswers[currentQuestion] === index) {
+            optionDiv.classList.add("selected");
+        }
+
+        optionDiv.onclick = function () {
+            selectAnswer(index);
+        };
+
+        optionsContainer.appendChild(optionDiv);
+    });
+
+    document.getElementById("progressBar").style.width =
+        `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+    document.getElementById("previousBtn").style.visibility =
+        currentQuestion === 0 ? "hidden" : "visible";
+
+    document.getElementById("nextBtn").textContent =
+        currentQuestion === questions.length - 1
+            ? "Submit Test ✓"
+            : "Next →";
+}
+
+function selectAnswer(index) {
+
+    userAnswers[currentQuestion] = index;
+
+    loadQuestion();
+}
+
+function nextQuestion() {
+
+    if (currentQuestion < questions.length - 1) {
+
+        currentQuestion++;
+
+        loadQuestion();
+
+    } else {
+
+        finishTest();
+    }
+}
+
+function previousQuestion() {
+
+    if (currentQuestion > 0) {
+
+        currentQuestion--;
+
+        loadQuestion();
+    }
+}
+
+function updateTimer() {
+
+    timeLeft--;
+
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+
+    document.getElementById("timer").textContent =
+        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+    if (timeLeft <= 0) {
+
+        clearInterval(timerInterval);
+
+        finishTest();
+    }
+}
+
+function finishTest() {
+
+    clearInterval(timerInterval);
+
+    let correct = 0;
+    let wrong = 0;
+    let unattempted = 0;
+
+    questions.forEach((question, index) => {
+
+        if (userAnswers[index] === null) {
+
+            unattempted++;
+
+        } else if (userAnswers[index] === question.answer) {
+
+            correct++;
+
+        } else {
+
+            wrong++;
+        }
+    });
+
+    const percentage =
+        Math.round((correct / questions.length) * 100);
+
+    document.getElementById("test").classList.add("hidden");
+
+    document.getElementById("result").classList.remove("hidden");
+
+    document.getElementById("percentage").textContent =
+        `${percentage}%`;
+
+    document.getElementById("correctCount").textContent =
+        correct;
+
+    document.getElementById("wrongCount").textContent =
+        wrong;
+
+    document.getElementById("unattemptedCount").textContent =
+        unattempted;
+
+    document.getElementById("score").textContent =
+        `${correct} / ${questions.length}`;
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+function showReview() {
+
+    document.getElementById("result").classList.add("hidden");
+
+    document.getElementById("review").classList.remove("hidden");
+
+    const container =
+        document.getElementById("reviewContainer");
+
+    container.innerHTML = "";
+
+    questions.forEach((question, index) => {
+
+        const userAnswer = userAnswers[index];
+
+        const card = document.createElement("div");
+
+        if (userAnswer === question.answer) {
+
+            card.className = "review-card correct-review";
+
+            card.innerHTML = `
+                <h3>Question ${index + 1} — ✅ Correct</h3>
+                <p><strong>Question:</strong> ${question.question}</p>
+                <p><strong>Your answer:</strong> ${question.options[userAnswer]}</p>
+
+                <div class="solution">
+                    <strong>💡 Explanation</strong>
+                    <p>${question.explanation}</p>
+                </div>
+            `;
+
+        } else if (userAnswer === null) {
+
+            card.className = "review-card";
+
+            card.innerHTML = `
+                <h3>Question ${index + 1} — ⚪ Unattempted</h3>
+                <p><strong>Question:</strong> ${question.question}</p>
+
+                <div class="solution">
+                    <strong>✅ Correct Answer</strong>
+                    <p>${question.options[question.answer]}</p>
+                    <p>${question.solution}</p>
+                </div>
+            `;
+
+        } else {
+
+            card.className = "review-card";
+
+            card.innerHTML = `
+                <h3>Question ${index + 1} — ❌ Wrong</h3>
+
+                <p><strong>Question:</strong> ${question.question}</p>
+
+                <p>
+                    <strong>Your answer:</strong>
+                    ${question.options[userAnswer]}
+                </p>
+
+                <p>
+                    <strong>Correct answer:</strong>
+                    ${question.options[question.answer]}
+                </p>
+
+                <div class="mistake">
+                    <strong>🔍 Where you made the mistake</strong>
+                    <p>${question.mistake}</p>
+                </div>
+
+                <div class="solution">
+                    <strong>💡 Correct Solution</strong>
+                    <p>${question.solution}</p>
+                </div>
+            `;
+        }
+
+        container.appendChild(card);
+    });
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+function goHome() {
+
+    document.getElementById("review").classList.add("hidden");
+
+    document.getElementById("home").classList.remove("hidden");
+    document.getElementById("subjects").classList.remove("hidden");
+    document.getElementById("about").classList.remove("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
