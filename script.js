@@ -12,6 +12,75 @@ const questions = [
     explanation: "Use the equation s = ut + ½at² with u = 0.",
     mistake: "Using the velocity equation instead of the displacement equation.",
     solution: "96 = ½ × a × 8² = 32a ⇒ a = 3 m/s²."
+    },
+    {
+    question: "A 5 kg block is pulled on a smooth horizontal surface by a constant force of 20 N for 10 m. The work done by the force is:",
+    options: [
+        "50 J",
+        "100 J",
+        "200 J",
+        "400 J"
+    ],
+    answer: 2,
+    explanation: "Work done = Force × Distance.",
+    mistake: "Do not use mass in the work formula here.",
+    solution: "W = 20 × 10 = 200 J."
+},
+
+{
+    question: "A 4 kg body is acted upon by two perpendicular forces of 6 N and 8 N. The magnitude of the resultant acceleration is:",
+    options: [
+        "2.5 m/s²",
+        "3.5 m/s²",
+        "5 m/s²",
+        "10 m/s²"
+    ],
+    answer: 0,
+    explanation: "First find the resultant force using Pythagoras, then divide by mass.",
+    mistake: "Adding 6 N and 8 N directly instead of finding the vector resultant.",
+    solution: "Resultant force = √(6² + 8²) = 10 N, so a = 10/4 = 2.5 m/s²."
+},
+
+{
+    question: "A satellite revolves around Earth in a circular orbit of radius 2R, where R is Earth's radius. If its orbital speed at radius R is v, the new orbital speed is:",
+    options: [
+        "v",
+        "2v",
+        "v/4",
+        "v/√2"
+    ],
+    answer: 3,
+    explanation: "Orbital speed varies inversely with the square root of orbital radius.",
+    mistake: "Orbital speed is not inversely proportional to radius.",
+    solution: "v₂ = v/√2."
+},
+
+{
+    question: "A particle executes SHM with amplitude 8 cm. At a displacement of 4 cm, its speed is maximum?",
+    options: [
+        "Always true",
+        "False",
+        "Only for large amplitudes",
+        "Cannot be determined"
+    ],
+    answer: 1,
+    explanation: "In SHM, speed is maximum only at the mean position (x = 0).",
+    mistake: "Assuming speed is maximum at half the amplitude.",
+    solution: "Since x = 4 cm is not the mean position, the statement is false."
+},
+
+{
+    question: "Two resistors of 6 Ω and 3 Ω are connected in parallel across a 12 V battery. The total current drawn is:",
+    options: [
+        "2 A",
+        "4 A",
+        "6 A",
+        "8 A"
+    ],
+    answer: 2,
+    explanation: "Find equivalent resistance first, then apply Ohm's law.",
+    mistake: "Adding the resistances instead of using the parallel formula.",
+    solution: "Equivalent resistance = 2 Ω, so I = 12/2 = 6 A."
 },
 
 {
