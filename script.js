@@ -339,6 +339,23 @@ function finishTest() {
 
     const percentage =
         Math.round((correct / questions.length) * 100);
+    let collegePrediction = "";
+
+if (percentage >= 95) {
+    collegePrediction = "🎓 Predicted Range: IIT Delhi / IIT Bombay / IIT Madras";
+} else if (percentage >= 90) {
+    collegePrediction = "🎓 Predicted Range: Top 7 IITs";
+} else if (percentage >= 80) {
+    collegePrediction = "🎓 Predicted Range: IIT Guwahati / IIT Roorkee / IIT BHU";
+} else if (percentage >= 70) {
+    collegePrediction = "🎓 Predicted Range: New IITs";
+} else if (percentage >= 60) {
+    collegePrediction = "📘 JEE Main level – Keep improving";
+} else {
+    collegePrediction = "🚀 Practice more to improve your IIT prediction";
+}
+
+document.getElementById("collegePrediction").textContent = collegePrediction;
 
     document.getElementById("test").classList.add("hidden");
     document.getElementById("result").classList.remove("hidden");
