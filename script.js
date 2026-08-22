@@ -138,6 +138,75 @@ const questions = [
     mistake: "Using sin45° instead of sin90°.",
     solution: "R = 20² × 1 / 10 = 400/10 = 40 m."
 }
+    {
+    question: "A car accelerates uniformly from 10 m/s to 30 m/s while covering 200 m. Its acceleration is:",
+    options: [
+        "1.5 m/s²",
+        "2.0 m/s²",
+        "2.5 m/s²",
+        "3.0 m/s²"
+    ],
+    answer: 1,
+    explanation: "Use the equation v² = u² + 2as.",
+    mistake: "Do not use distance/time because time is not given.",
+    solution: "30² = 10² + 2a × 200 ⇒ 900 = 100 + 400a ⇒ a = 2.0 m/s²."
+},
+
+{
+    question: "A 2 kg body moving at 5 m/s is brought to rest by a retarding force. The work done by the retarding force is:",
+    options: [
+        "+25 J",
+        "−25 J",
+        "+50 J",
+        "−50 J"
+    ],
+    answer: 1,
+    explanation: "Apply the work–energy theorem.",
+    mistake: "Retarding force does negative work, not positive.",
+    solution: "W = ΔK = 0 − ½ × 2 × 5² = −25 J."
+},
+
+{
+    question: "A stone tied to a string of length 2 m completes 5 revolutions per second. The centripetal acceleration is:",
+    options: [
+        "100π² m/s²",
+        "200π² m/s²",
+        "400π² m/s²",
+        "800π² m/s²"
+    ],
+    answer: 1,
+    explanation: "Use a = ω²r where ω = 2πf.",
+    mistake: "Using frequency directly instead of angular velocity.",
+    solution: "ω = 10π rad/s, so a = (10π)² × 2 = 200π² m/s²."
+},
+
+{
+    question: "Three resistors of 6 Ω each are connected in parallel. Their equivalent resistance is:",
+    options: [
+        "1 Ω",
+        "2 Ω",
+        "3 Ω",
+        "18 Ω"
+    ],
+    answer: 1,
+    explanation: "For n equal resistors in parallel, Req = R/n.",
+    mistake: "Do not add resistances in a parallel combination.",
+    solution: "Req = 6/3 = 2 Ω."
+},
+
+{
+    question: "The energy of a photon is 6.6 × 10⁻¹⁹ J. If Planck's constant is 6.6 × 10⁻³⁴ J·s, its frequency is:",
+    options: [
+        "10¹³ Hz",
+        "10¹⁴ Hz",
+        "10¹⁵ Hz",
+        "10¹⁶ Hz"
+    ],
+    answer: 2,
+    explanation: "Use E = hf.",
+    mistake: "Frequency is energy divided by Planck's constant.",
+    solution: "f = (6.6 × 10⁻¹⁹)/(6.6 × 10⁻³⁴) = 10¹⁵ Hz."
+}
     ];
 
 let currentQuestion = 0;
