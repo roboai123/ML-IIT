@@ -137,8 +137,9 @@ const questions = [
     explanation: "Use R = u² sin2θ / g. At 45°, sin90° = 1.",
     mistake: "Using sin45° instead of sin90°.",
     solution: "R = 20² × 1 / 10 = 400/10 = 40 m."
-}
-    {
+},
+
+{
     question: "A car accelerates uniformly from 10 m/s to 30 m/s while covering 200 m. Its acceleration is:",
     options: [
         "1.5 m/s²",
